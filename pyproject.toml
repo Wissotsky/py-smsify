@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "py-smsify"
+version = "0.1.2"
+description = "Python library for creating GSM-7 compatible SMS messages"
+authors = ["Simon Wissotsky <Wissotsky@protonmail.com>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/SkyDiverCool/py-smsify"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+anyascii = "^0.3.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
