@@ -18,3 +18,9 @@ def test_language():
 
 def test_emoji():
     assert SmsMessage("this 🎉 is 👏 phenomenal 🔥").encoded_text == "this :tada: is :clap: phenomenal :fire:"
+
+def test_message_length():
+    assert SmsMessage("Gamer{}420").length == 12
+
+def test_message_segments():
+    assert SmsMessage("Gamer420").segments == 1

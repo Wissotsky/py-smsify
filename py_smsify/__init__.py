@@ -1,6 +1,7 @@
 __version__ = '0.1.0'
 
 from dataclasses import dataclass, field
+from math import ceil
 from anyascii import anyascii
 
 basic_table = ("@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\x1bÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?"
@@ -25,11 +26,16 @@ def message_encode(plaintext):
 @dataclass
 class SmsMessage:
     body: str
+    twilio: bool = False
     encoded_text: str = field(init=False)
     encoded_bytes: bytearray = field(init=False)
+    length: int = field(init=False)
+    segments: int = field(init=False)
     def __post_init__(self):
         self.encoded_text = message_encode(self.body).decode()
         self.encoded_bytes = bytes(message_encode(self.body))
+        self.length = len(self.encoded_bytes)
+        self.segments = ceil(self.length/(153 if self.twilio else 160))
     
     def __repr__(self):
         return self.encoded_text
