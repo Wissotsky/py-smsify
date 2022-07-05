@@ -1,1 +1,4 @@
-py_smsify/__pycache__/__init__.cpython-39.pyc
+tests/__pycache__/
+py_smsify/__pycache__/
+dist/
+poetry.lock
