@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-smsify"
-version = "0.1.3"
+version = "0.1.4"
 description = "Python library for creating GSM-7 compatible SMS messages"
 authors = ["Simon Wissotsky <Wissotsky@protonmail.com>"]
 readme = "README.md"
