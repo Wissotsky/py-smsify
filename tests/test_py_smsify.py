@@ -10,13 +10,14 @@ def test_bytes_field():
     assert SmsMessage("Cool Message!").encoded_bytes == b'Cool Message!'
 
 def test_language():
-    assert SmsMessage("Mojosa mesaĝo!").encoded_text == "Mojosa mesago!"
+    assert SmsMessage("酷短信！").encoded_text == "KuDuanXin!"
 
 def test_emoji():
     assert SmsMessage("Cool😎 Message✉️").encoded_text == "Cool:sunglasses: Message:envelope:"
 
 def test_message_length():
     assert SmsMessage("He\\o W{}rld!").length == 15
+    assert SmsMessage("Cool Message!").length == 13
 
 def test_message_segments():
     assert SmsMessage("Short message with less than one segment").segments == 1
