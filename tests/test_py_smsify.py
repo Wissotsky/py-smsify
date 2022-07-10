@@ -1,26 +1,28 @@
-from py_smsify import __version__
 from py_smsify import SmsMessage
+from urllib.request import urlopen
 
-def test_version():
-    assert __version__ == '0.1.0'
-
-def test_object_repr():
-    assert repr(SmsMessage("Gamer420")) == "Gamer420"
+WINNIE_THE_POOH = "https://gist.githubusercontent.com/SkyDiverCool/2ef648623b1b24580637a53fc6d8e1ea/raw/61656ecbfe897b76c5f960c0eb4c1b49a87b8d44/winniethepooh.txt"
 
 def test_text_field():
-    assert SmsMessage("Gamer420").encoded_text == "Gamer420"
+    assert SmsMessage("Cool Message!").encoded_text == "Cool Message!"
 
 def test_bytes_field():
-    assert SmsMessage("Gamer420").encoded_bytes == b'Gamer420'
+    assert SmsMessage("Cool Message!").encoded_bytes == b'Cool Message!'
 
 def test_language():
-    assert SmsMessage("גיימר420").encoded_text == "gyymr420"
+    assert SmsMessage("Mojosa mesaĝo!").encoded_text == "Mojosa mesago!"
 
 def test_emoji():
-    assert SmsMessage("this 🎉 is 👏 phenomenal 🔥").encoded_text == "this :tada: is :clap: phenomenal :fire:"
+    assert SmsMessage("Cool😎 Message✉️").encoded_text == "Cool:sunglasses: Message:envelope:"
 
 def test_message_length():
-    assert SmsMessage("Gamer{}420").length == 12
+    assert SmsMessage("He\\o W{}rld!").length == 15
 
 def test_message_segments():
-    assert SmsMessage("Gamer420").segments == 1
+    assert SmsMessage("Short message with less than one segment").segments == 1
+
+def test_winniethepoohsize():
+    text = urlopen(WINNIE_THE_POOH).read().decode()
+    assert SmsMessage(text).length == 454
+    assert SmsMessage(text).segments == 3
+    assert SmsMessage(text,twilio=True).segments == 3

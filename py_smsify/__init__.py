@@ -1,5 +1,3 @@
-__version__ = '0.1.0'
-
 from dataclasses import dataclass, field
 from math import ceil
 from anyascii import anyascii
@@ -11,6 +9,21 @@ extended_table = ("````````````````````^```````````````````{}`````\\````````````
 
 @dataclass
 class SmsMessage:
+    """
+    Sms Message Representation
+
+    Values:
+        Unicode body(body: str) Mandatory!
+        Use twilio segmentation(twilio: bool) default=False
+        GSM-7 encoded body(encoded_text: str)
+        GSM-7 encoded bytes(encoded_bytes: bytes)
+        Message length(length: int)
+        Message segments(segments: int)
+    
+    Functions:
+        encode(string: str) -> str
+        message_encode(plaintext: str) -> bytearray
+    """
     body: str
     twilio: bool = False
     encoded_text: str = field(init=False)
@@ -23,11 +36,8 @@ class SmsMessage:
         self.length = len(self.encoded_bytes)
         self.segments = ceil(self.length/(153 if self.twilio and self.length>160 else 160))
     
-    def __repr__(self):
-        return self.encoded_text
-    
-    """Encode a unicode string to a bytearray of SMS characters"""
     def message_encode(plaintext: str) -> bytearray:
+        """Encode a unicode string to a bytearray of SMS characters"""
         literatedtext = anyascii(plaintext)
         charbytes = bytearray()
         for character in literatedtext:
@@ -41,6 +51,6 @@ class SmsMessage:
                 charbytes.append(character_index)
         return charbytes
 
-    """Encode python string into a GSM-7 python encoded string"""
     def encode(string: str) -> str:
+        """Encode python string into a GSM-7 python encoded string"""
         return SmsMessage.message_encode(string).decode()
