@@ -1,11 +1,22 @@
 [tool.poetry]
 name = "py-smsify"
-version = "0.2.0"
+version = "0.2.1"
 description = "Python library for creating GSM-7 compatible SMS messages"
 authors = ["Simon Wissotsky <Wissotsky@protonmail.com>"]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/SkyDiverCool/py-smsify"
+keywords = ["SMS","GSM-7","Encoding","Unicode","3GPP","23.038","03.38"]
+
+classifiers =[
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Telecommunications Industry",
+    "Topic :: Communications :: Telephony",
+    "Topic :: Text Processing :: Filters"
+]
 
 
 [tool.poetry.dependencies]
